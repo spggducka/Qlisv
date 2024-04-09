@@ -12,7 +12,7 @@ typedef struct {
 
 
 } Thongtin;
-
+// Chuan hoa ten
 void chuanhoa(char *Hoten) {
     *Hoten = toupper(*Hoten);
     for (int i = 1; i < strlen(Hoten); i++) {
@@ -37,6 +37,8 @@ void chuanhoa(char *Hoten) {
 Thongtin Sinhvien[100];
 int demsv = 0;
 
+
+//Nhap thong tin
 void Nhapthongtin() {
     Thongtin Add;
 
@@ -64,6 +66,8 @@ void Nhapthongtin() {
     Sinhvien[demsv++] = Add;
 }
 
+
+//Hien thi all
 void HienThi() {
     for (int i = 0; i < 72; i++) {
         printf("_");
@@ -80,7 +84,7 @@ void HienThi() {
 }
 
 	
-//Hien thi
+//Hien thi 1 sinh vien
 void Hienthi_1(Thongtin Sinhvien) {
     printf("Ho va ten: %s\n", Sinhvien.Hoten);
     printf("Ma Sinh Vien: %s\n", Sinhvien.Masv);
@@ -116,6 +120,9 @@ void timkiem() {
 }
 
 
+
+
+//thong ke
 float trungbinh(Thongtin Sinhvien){
 
 	float tb = (Sinhvien.anh + Sinhvien.toan + Sinhvien.van) /3;
@@ -150,7 +157,7 @@ void hienthitb(){
 	printf("|___|__________|_________________________|_______________|\n");
 }
 
-
+// xoa sinh vien
 void xoasinhvien(){
 
     char xoa[20];
@@ -175,6 +182,7 @@ void xoasinhvien(){
 
 }
 
+//sua thong tin
 void suathongtin() {
     Thongtin suadoi;
     char sua[20];
@@ -221,7 +229,7 @@ void suathongtin() {
 
 
 
-
+//luu vao file
 void LuuVaoFile(const char *tenFile) {
     FILE *file = fopen(tenFile, "w"); 
 
