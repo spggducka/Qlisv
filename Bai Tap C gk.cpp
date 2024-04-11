@@ -38,9 +38,24 @@ Thongtin Sinhvien[100];
 int demsv = 0;
 
 
+void nhapdiem(float *diem, const char *monhoc) {
+    do {
+        printf("Nhap diem %s: ", monhoc);
+        if (scanf("%f", diem) != 1) {
+            printf("Diem %s phai la mot so. Nhap lai.\n",monhoc);
+            while (getchar() != '\n'); 
+        } else {
+            break;
+        }
+    } while (1);
+}
+
 //Nhap thong tin
 void Nhapthongtin() {
-    Thongtin Add;
+    
+	
+	
+	Thongtin Add;
 
     printf("Nhap ho ten sinh vien: ");
     scanf("%[^\n]", &Add.Hoten);
@@ -50,18 +65,12 @@ void Nhapthongtin() {
     printf("Nhap ma sinh vien: ");
     scanf("%s", &Add.Masv);
     getchar();
+    
+    nhapdiem(&Add.toan,"toan");
 
-    printf("Nhap diem toan sinh vien: ");
-    scanf("%f", &Add.toan);
-    getchar();
+    nhapdiem(&Add.van,"van");
 
-    printf("Nhap diem van sinh vien: ");
-    scanf("%f", &Add.van);
-    getchar();
-
-    printf("Nhap diem anh sinh vien: ");
-    scanf("%f", &Add.anh);
-    getchar();
+    nhapdiem(&Add.anh,"anh");
 
     Sinhvien[demsv++] = Add;
 }
@@ -247,6 +256,33 @@ void LuuVaoFile(const char *tenFile) {
     printf("Da luu du lieu vao file.\n");
 }
 
+
+void MoFile(const char *tenFile) {
+    FILE *file = fopen(tenFile, "r"); 
+
+    if (file == NULL) {
+        printf("Khong the mo file de doc.\n");
+        return;
+    }
+
+   
+    char line[100]; 
+    while (fgets(line, sizeof(line), file) != NULL) { 
+        Thongtin sv;
+        sscanf(line, "%9[^|]|%24[^|]|%f|%f|%f", sv.Masv, sv.Hoten, &sv.toan, &sv.van, &sv.anh);
+        printf("Ma SV: %s\n", sv.Masv);
+        printf("Ho va Ten: %s\n", sv.Hoten);
+        printf("Diem Toan: %.1f\n", sv.toan);
+        printf("Diem Van: %.1f\n", sv.van);
+        printf("Diem Anh: %.1f\n", sv.anh);
+        printf("\n");
+    }
+
+    fclose(file); 
+}
+
+
+
 int main() {
     int choice;
     
@@ -285,6 +321,9 @@ int main() {
                 break;
             case 7:
             	LuuVaoFile("C:/Users/Admin/Downloads/sinhvien.txt");
+            	break;
+            case 8:
+            	MoFile("C:/Users/Admin/Downloads/sinhvien.txt");
             	break;
             case 0:
                 printf("Chuong trinh ket thuc. Tam biet!\n");
